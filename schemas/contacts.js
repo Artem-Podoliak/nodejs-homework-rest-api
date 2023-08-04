@@ -5,4 +5,10 @@ const addSchema = Joi.object({
   phone: Joi.string().allow(null),
 }).or("name", "email", "phone");
 
-module.exports = { addSchema };
+const postSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().required(),
+  phone: Joi.string().required(),
+});
+
+module.exports = { addSchema, postSchema };
