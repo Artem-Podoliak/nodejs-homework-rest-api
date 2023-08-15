@@ -24,7 +24,7 @@ const listContacts = async (req, res) => {
 const getContactById = async (req, res) => {
   const { contactId } = req.params;
   const { _id: owner } = req.user;
-  const result = await Contact.findById({ _id: contactId, owner });
+  const result = await Contact.findOne({ _id: contactId, owner });
   if (!result) {
     throw HttpError(404, "Not found");
   }
@@ -50,7 +50,7 @@ const addContact = async (req, res) => {
 const updateContact = async (req, res) => {
   const { contactId } = req.params;
   const { _id: owner } = req.user;
-  const result = await Contact.findByIdAndUpdate(
+  const result = await Contact.findOneAndUpdate(
     { _id: contactId, owner },
     req.body,
     {
@@ -66,7 +66,7 @@ const updateContact = async (req, res) => {
 const updateFavoriteContact = async (req, res) => {
   const { contactId } = req.params;
   const { _id: owner } = req.user;
-  const result = await Contact.findByIdAndUpdate(
+  const result = await Contact.findOneAndUpdate(
     { _id: contactId, owner },
     req.body,
     {
